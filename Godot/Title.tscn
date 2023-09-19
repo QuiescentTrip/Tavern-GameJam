@@ -4,10 +4,23 @@
 
 [node name="Title" type="Node2D"]
 
-[node name="Button" type="Button" parent="."]
-offset_left = 338.0
-offset_top = 197.0
-offset_right = 696.0
-offset_bottom = 404.0
+[node name="Quit" type="Button" parent="."]
+offset_left = 413.0
+offset_top = 425.0
+offset_right = 674.0
+offset_bottom = 552.0
 text = "Exit"
 script = ExtResource("1_dyac6")
+
+[node name="Play" type="Button" parent="."]
+offset_left = 412.0
+offset_top = 281.0
+offset_right = 671.0
+offset_bottom = 404.0
+text = "Begin"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="Quit" to="Quit" method="_on_pressed"]
+[connection signal="pressed" from="Play" to="Quit" method="_on_button_pressed"]
+[connection signal="ready" from="AudioStreamPlayer" to="Quit" method="_on_audio_stream_player_ready"]

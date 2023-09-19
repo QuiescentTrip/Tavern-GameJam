@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqp3r36ef8h16"
+path="res://.godot/imported/i like it.wav-0e26aced9b9068021c2540cbff8255ad.sample"
+
+[deps]
+
+source_file="res://music/i like it.wav"
+dest_files=["res://.godot/imported/i like it.wav-0e26aced9b9068021c2540cbff8255ad.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvr403npudxyw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pd7fc"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pnhrr"]
+
+[node name="Basic" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pd7fc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(17.465, 17.465)
+texture = SubResource("CanvasTexture_pnhrr")
