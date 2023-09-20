@@ -8,12 +8,19 @@ var is_in
 var direction
 var player = preload("res://Player/Player.tscn")
 
+signal bullet_fired(bullet, position, direction)
+
+@onready var end = $Marker2D
+
+var bullet = preload("res://bullet.tscn")
+
 
 func _physics_process(delta):
 	if(is_in and (player.position - self.global_position) >= Vector2(20,20)):
 		direction = (player.position - self.global_position).normalized() * SPEED
 		velocity = direction
-	#look_at(player)
+		look_at(player.position)
+	
 	move_and_slide()
 
 
@@ -21,9 +28,9 @@ func _on_area_2d_body_entered(body):
 	print(body)
 	self.player = body
 	is_in = true
-	
-	
-	
+	var bullet_instance = bullet.instantiate()
+	var direction = (end.global_position - global_position).normalized()
+	bullet_fired.emit(bullet_instance, end.global_position, direction)
 
 
 func _on_area_2d_body_exited(body):

@@ -15,5 +15,6 @@ script = ExtResource("1_glbaw")
 position = Vector2(216, 122)
 
 [node name="Basic_Enemy" parent="." instance=ExtResource("4_76xhd")]
+position = Vector2(707, 276)
 
 [connection signal="bullet_fired" from="Player" to="bullet_manager" method="_on_player_bullet_fired"]
