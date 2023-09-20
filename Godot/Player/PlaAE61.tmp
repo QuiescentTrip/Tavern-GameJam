@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1atq6kw2uano"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_lx08a"]
+[ext_resource type="AudioStream" uid="uid://d02q4y7okdr0o" path="res://sfx/sound.wav" id="2_btart"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yiplg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_criak"]
+size = Vector2(35.75, 33)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-16, -15)
+motion_mode = 1
+script = ExtResource("1_lx08a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(17.25, 16.75)
+scale = Vector2(35.5, 34.5)
+texture = SubResource("CanvasTexture_yiplg")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(46, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(18, 17)
+shape = SubResource("RectangleShape2D_criak")
+
+[node name="Shot" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(15, 14)
+stream = ExtResource("2_btart")

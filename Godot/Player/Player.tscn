@@ -1,18 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://lb0xo04g73u1"]
+[gd_scene load_steps=5 format=3 uid="uid://cdqg41xlkfgan"]
 
-[ext_resource type="Script" path="res://Player/Player.gd" id="1_xr8m0"]
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_lx08a"]
+[ext_resource type="AudioStream" uid="uid://d02q4y7okdr0o" path="res://sfx/sound.wav" id="2_btart"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8c2uw"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_pd7fc"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_r5lnu"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_pnhrr"]
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_xr8m0")
+scale = Vector2(2, 2)
+motion_mode = 1
+script = ExtResource("1_lx08a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8c2uw")
+shape = SubResource("CircleShape2D_pd7fc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.19209e-06, -0.500001)
-scale = Vector2(16, 17)
-texture = SubResource("CanvasTexture_r5lnu")
+scale = Vector2(17.465, 17.465)
+texture = SubResource("CanvasTexture_pnhrr")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(15, 0)
+
+[node name="Shot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_btart")

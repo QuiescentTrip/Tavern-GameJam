@@ -1,8 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c38ll0ycvi8wd"]
+[gd_scene load_steps=4 format=3 uid="uid://c38ll0ycvi8wd"]
 
-[ext_resource type="PackedScene" uid="uid://lb0xo04g73u1" path="res://Player/Player.tscn" id="1_v1gjv"]
+[ext_resource type="Script" path="res://bullet_manager.gd" id="1_glbaw"]
+[ext_resource type="Script" path="res://World.gd" id="1_kwgfm"]
+[ext_resource type="PackedScene" uid="uid://cdqg41xlkfgan" path="res://Player/Player.tscn" id="1_v1gjv"]
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
+script = ExtResource("1_kwgfm")
+
+[node name="bullet_manager" type="Node2D" parent="."]
+script = ExtResource("1_glbaw")
 
 [node name="Player" parent="." instance=ExtResource("1_v1gjv")]
-position = Vector2(525, 390)
+position = Vector2(216, 122)
+
+[connection signal="bullet_fired" from="Player" to="bullet_manager" method="_on_player_bullet_fired"]
