@@ -4,15 +4,34 @@ extends CharacterBody2D
 const SPEED = 300.0
 
 var _velocity := Vector2.ZERO
-
+var is_in
+var direction
+var player = preload("res://Player/Player.tscn")
 
 
 func _physics_process(delta):
+	if(is_in and (player.position - self.global_position) >= Vector2(20,20)):
+		direction = (player.position - self.global_position).normalized() * SPEED
+		velocity = direction
+	#look_at(player)
 	move_and_slide()
 
 
 func _on_area_2d_body_entered(body):
-	var direction = (body.global_position - self.global_position)
-	print(direction)
+	print(body)
+	self.player = body
+	is_in = true
 	
 	
+	
+
+
+func _on_area_2d_body_exited(body):
+	print("exited")
+	is_in = false
+	var velocity := Vector2.ZERO
+	direction = Vector2.ZERO
+	print(velocity)
+	
+func onkill():
+	queue_free()

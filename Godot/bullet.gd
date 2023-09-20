@@ -22,3 +22,8 @@ func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		var velocity = direction * speed
 		global_position += velocity
+
+
+func _on_body_entered(body):
+	if(body.has_method("onkill")):
+		body.onkill()

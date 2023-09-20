@@ -18,3 +18,5 @@ shape = SubResource("RectangleShape2D_lp4sx")
 position = Vector2(7.75, 3.25)
 scale = Vector2(16.5, 7.5)
 texture = SubResource("CanvasTexture_texoc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
