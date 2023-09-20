@@ -5,7 +5,7 @@ class_name Player
 signal bullet_fired(bullet, position, direction)
 
 var friction = 0.18
-var speed := 400
+var speed = 400
 var bulletspeed = 4000
 var has_bullet = true
 

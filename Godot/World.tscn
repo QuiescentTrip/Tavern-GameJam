@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c38ll0ycvi8wd"]
+[gd_scene load_steps=5 format=3 uid="uid://c38ll0ycvi8wd"]
 
 [ext_resource type="Script" path="res://bullet_manager.gd" id="1_glbaw"]
 [ext_resource type="Script" path="res://World.gd" id="1_kwgfm"]
 [ext_resource type="PackedScene" uid="uid://cdqg41xlkfgan" path="res://Player/Player.tscn" id="1_v1gjv"]
+[ext_resource type="PackedScene" uid="uid://5hcvsmt2jkty" path="res://Enemies/Basic_Enemy.tscn" id="4_76xhd"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_kwgfm")
@@ -12,5 +13,7 @@ script = ExtResource("1_glbaw")
 
 [node name="Player" parent="." instance=ExtResource("1_v1gjv")]
 position = Vector2(216, 122)
+
+[node name="Basic_Enemy" parent="." instance=ExtResource("4_76xhd")]
 
 [connection signal="bullet_fired" from="Player" to="bullet_manager" method="_on_player_bullet_fired"]
