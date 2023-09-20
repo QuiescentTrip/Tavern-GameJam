@@ -2,17 +2,16 @@ extends CharacterBody2D
 
 class_name Player
 
-signal bullet_fired(bullet, position, direction)
+
 
 var friction = 0.18
 var speed = 400
 var bulletspeed = 4000
-var has_bullet = true
+var empty = false
 
 @onready var end = $Marker2D
 #var player = preload("res://Player/Player.tscn")
 var bullet = preload("res://bullet.tscn")
-
 
 var _velocity := Vector2.ZERO
 
@@ -33,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = speed * direction
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("LMB") and has_bullet:
+	if Input.is_action_just_pressed("LMB") and !empty:
 		fire()
 	
 	look_at(get_global_mouse_position())
@@ -42,6 +41,12 @@ func fire():
 	$Shot.play()
 	var bullet_instance = bullet.instantiate()
 	var direction = (end.global_position - global_position).normalized()
-	bullet_fired.emit(bullet_instance, end.global_position, direction)
-	has_bullet = false
+	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction)
+	empty = true
+	
+func onkill():
+	if !empty:
+		queue_free()
+	else:
+		empty = false
 	

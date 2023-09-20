@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c38ll0ycvi8wd"]
+[gd_scene load_steps=6 format=3 uid="uid://c38ll0ycvi8wd"]
 
 [ext_resource type="Script" path="res://bullet_manager.gd" id="1_glbaw"]
 [ext_resource type="Script" path="res://World.gd" id="1_kwgfm"]
 [ext_resource type="PackedScene" uid="uid://cdqg41xlkfgan" path="res://Player/Player.tscn" id="1_v1gjv"]
 [ext_resource type="PackedScene" uid="uid://5hcvsmt2jkty" path="res://Enemies/Basic_Enemy.tscn" id="4_76xhd"]
+[ext_resource type="AudioStream" uid="uid://fcqqmhpxnhky" path="res://music/newshit.wav" id="5_vgnqe"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_kwgfm")
@@ -17,4 +18,6 @@ position = Vector2(216, 122)
 [node name="Basic_Enemy" parent="." instance=ExtResource("4_76xhd")]
 position = Vector2(707, 276)
 
-[connection signal="bullet_fired" from="Player" to="bullet_manager" method="_on_player_bullet_fired"]
+[node name="Music1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_vgnqe")
+autoplay = true
