@@ -16,7 +16,7 @@ var bullet = preload("res://bullet.tscn")
 func _physics_process(_delta) -> void:
 	if player != null:
 		var distance_to = position.distance_to(player.position)
-		if  distance_to > 300 and distance_to < 600:
+		if  distance_to > 300 and distance_to < 1000:
 			look_at(player.global_position)
 			var target = (player.position - self.global_position).normalized()
 			direction =  target * speed

@@ -24,6 +24,9 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if(body.has_method("onkill") and body.team != self.team):
 		body.onkill()
+	elif self.team == 0:
+		player.bulletkill()
+		queue_free()
 	queue_free()
 
 
