@@ -2,9 +2,10 @@ extends Area2D
 
 class_name Bullet
 
-
+var team = -1
 var direction := Vector2.ZERO
 var speed = 20
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -25,6 +26,6 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	if(body.has_method("onkill")):
+	if(body.has_method("onkill") and body.team != team):
 		body.onkill()
 	queue_free()

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 200.0
 
 var _velocity := Vector2.ZERO
 var is_in
@@ -16,18 +16,21 @@ var bullet = preload("res://bullet.tscn")
 
 func _physics_process(delta):
 	if(is_in and player != null):
-		#direction = (player.position - self.global_position).normalized() * SPEED
-		#velocity = direction
+		var target = (player.position - self.global_position).normalized()
+		direction =  target * SPEED
+		
 		look_at(player.global_position)
+		
+		if position.distance_to(player.position) > 200:
+			velocity = direction
+			move_and_slide()
+		var bullet_instance = bullet.instantiate()
+		var direction = (end.global_position - global_position).normalized()
+		GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 1)
 	
-	move_and_slide()
 
 
 func _on_area_2d_body_entered(body):
-	print("hi")
-	var bullet_instance = bullet.instantiate()
-	var direction = (end.global_position - global_position).normalized()
-	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction)
 	self.player = body
 	is_in = true
 

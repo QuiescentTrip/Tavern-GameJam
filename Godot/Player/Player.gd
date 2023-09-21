@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 
-
+var team = 0
 var friction = 0.18
 var speed = 400
 var bulletspeed = 4000
@@ -41,7 +41,7 @@ func fire():
 	$Shot.play()
 	var bullet_instance = bullet.instantiate()
 	var direction = (end.global_position - global_position).normalized()
-	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction)
+	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 0)
 	empty = true
 	
 func onkill():
