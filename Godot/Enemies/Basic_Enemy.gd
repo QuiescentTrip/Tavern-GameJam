@@ -1,46 +1,45 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
-
-var _velocity := Vector2.ZERO
-var is_in
+const speed = 200.0
+const friction = 0.20
+var team = 1
 var direction
 
-var player
-
+@onready var cooldown = $cooldown
+@onready var player = get_parent().get_node("Player")
 @onready var end = $Marker2D
 
 var bullet = preload("res://bullet.tscn")
 
 
-func _physics_process(delta):
-	if(is_in and player != null):
-		var target = (player.position - self.global_position).normalized()
-		direction =  target * SPEED
-		
+func _physics_process(_delta) -> void:
+	var distance_to = position.distance_to(player.position)
+	if  distance_to > 300 and distance_to < 600:
 		look_at(player.global_position)
-		
+		var target = (player.position - self.global_position).normalized()
+		direction =  target * speed
 		if position.distance_to(player.position) > 200:
-			velocity = direction
+			if direction.length() > 1.0:
+				direction = direction.normalized()
+			var target_velocity = direction * speed
+			velocity += (target_velocity - velocity) * friction
+			
 			move_and_slide()
+		fire()
+	elif(distance_to <= 300):
+		look_at(player.global_position)
+		fire()
+		
+	
+
+func fire():
+	if cooldown.is_stopped():
+		$Shot.play()
 		var bullet_instance = bullet.instantiate()
-		var direction = (end.global_position - global_position).normalized()
+		direction = (end.global_position - global_position).normalized()
 		GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 1)
-	
+		cooldown.start()
 
-
-func _on_area_2d_body_entered(body):
-	self.player = body
-	is_in = true
-
-
-func _on_area_2d_body_exited(body):
-	print("exited")
-	is_in = false
-	var velocity := Vector2.ZERO
-	direction = Vector2.ZERO
-	player = body
-	
 func onkill():
 	queue_free()

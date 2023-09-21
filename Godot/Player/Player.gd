@@ -46,7 +46,8 @@ func fire():
 	
 func onkill():
 	if !empty:
-		queue_free()
+		#queue_free()
+		pass
 	else:
 		empty = false
 	
