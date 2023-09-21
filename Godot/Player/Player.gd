@@ -22,7 +22,6 @@ func _ready():
 	
 	
 func _physics_process(_delta: float) -> void:
-	apply_camera(_delta)
 	var direction := Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -46,11 +45,6 @@ func fire():
 	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 0)
 	empty = true
 	
-func apply_camera(delta):
-	var mpos = get_global_mouse_position()
-	var ppos = global_position
-	center = Vector2((ppos.x + mpos.x) / 2, (ppos.y + mpos.y) / 2)
-	$Camera2D.global_position = center	
 	
 func onkill():
 	if !empty:
