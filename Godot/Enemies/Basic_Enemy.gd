@@ -14,22 +14,23 @@ var bullet = preload("res://bullet.tscn")
 
 
 func _physics_process(_delta) -> void:
-	var distance_to = position.distance_to(player.position)
-	if  distance_to > 300 and distance_to < 600:
-		look_at(player.global_position)
-		var target = (player.position - self.global_position).normalized()
-		direction =  target * speed
-		if position.distance_to(player.position) > 200:
-			if direction.length() > 1.0:
-				direction = direction.normalized()
-			var target_velocity = direction * speed
-			velocity += (target_velocity - velocity) * friction
+	if player != null:
+		var distance_to = position.distance_to(player.position)
+		if  distance_to > 300 and distance_to < 600:
+			look_at(player.global_position)
+			var target = (player.position - self.global_position).normalized()
+			direction =  target * speed
+			if position.distance_to(player.position) > 200:
+				if direction.length() > 1.0:
+					direction = direction.normalized()
+				var target_velocity = direction * speed
+				velocity += (target_velocity - velocity) * friction
 			
-			move_and_slide()
-		fire()
-	elif(distance_to <= 300):
-		look_at(player.global_position)
-		fire()
+				move_and_slide()
+			fire()
+		elif(distance_to <= 300):
+			look_at(player.global_position)
+			fire()
 		
 	
 
