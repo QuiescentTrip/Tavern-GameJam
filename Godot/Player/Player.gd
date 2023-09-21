@@ -2,12 +2,13 @@ extends CharacterBody2D
 
 class_name Player
 
-
+var center = Vector2()
+var damping = 12.0
 var team = 0
 var friction = 0.18
 var speed = 400
 var bulletspeed = 4000
-var empty = false
+var empty = true
 
 @onready var end = $Marker2D
 #var player = preload("res://Player/Player.tscn")
@@ -21,6 +22,7 @@ func _ready():
 	
 	
 func _physics_process(_delta: float) -> void:
+	apply_camera(_delta)
 	var direction := Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -44,9 +46,18 @@ func fire():
 	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 0)
 	empty = true
 	
+func apply_camera(delta):
+	var mpos = get_global_mouse_position()
+	var ppos = global_position
+	center = Vector2((ppos.x + mpos.x) / 2, (ppos.y + mpos.y) / 2)
+	$Camera2D.global_position = center	
+	
 func onkill():
 	if !empty:
 		queue_free()
 	else:
 		empty = false
+
+func bulletkill():
+	queue_free()
 	

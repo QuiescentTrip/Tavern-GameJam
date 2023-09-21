@@ -2,23 +2,19 @@ extends Area2D
 
 class_name Bullet
 
-var team
+var team = -1
 var direction := Vector2.ZERO
 var speed = 25
+@onready var player = get_parent().get_parent().get_node("Player")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Timer.start()
+# Called when the node enters the scene tree for the first time.
 
 func set_direction(direction):
 	self.direction = direction
 	rotation += direction.angle()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	var forward_direction = Vector2(0, -1).rotated(rotation)
-#	position += forward_direction * speed * delta
-	
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		var velocity = direction * speed
@@ -26,7 +22,12 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	print(body.team)
 	if(body.has_method("onkill") and body.team != self.team):
 		body.onkill()
+	queue_free()
+
+
+func _on_timer_timeout():
+	if team == 0:
+		player.bulletkill()
 	queue_free()
