@@ -1,11 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdqg41xlkfgan"]
+[gd_scene load_steps=8 format=3 uid="uid://cdqg41xlkfgan"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lx08a"]
 [ext_resource type="AudioStream" uid="uid://d02q4y7okdr0o" path="res://sfx/sound.wav" id="2_btart"]
+[ext_resource type="Texture2D" uid="uid://dpp7p5xa0deka" path="res://sprites/New Piskel.png" id="3_25vwd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pd7fc"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_pnhrr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_thuh2"]
+atlas = ExtResource("3_25vwd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlkbf"]
+atlas = ExtResource("3_25vwd")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqnaw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thuh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlkbf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -13,14 +34,15 @@ motion_mode = 1
 script = ExtResource("1_lx08a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.62924, 1.62924)
 shape = SubResource("CircleShape2D_pd7fc")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(17.465, 17.465)
-texture = SubResource("CanvasTexture_pnhrr")
-
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(15, 0)
+position = Vector2(22, 0)
 
 [node name="Shot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_btart")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_mqnaw")
