@@ -50,6 +50,7 @@ func fire():
 	
 func onkill():
 	if !empty:
+		get_tree().paused = true
 		queue_free()
 	else:
 		AnimatedSprite.frame = 1

@@ -4,7 +4,7 @@ class_name Bullet
 
 var team = -1
 var direction := Vector2.ZERO
-var speed = 25
+var speed = 15
 @onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():

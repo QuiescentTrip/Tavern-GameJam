@@ -7,8 +7,11 @@ var team = 1
 var direction
 
 @onready var cooldown = $cooldown
-@onready var player = get_parent().get_node("Player")
 @onready var end = $Marker2D
+@onready var player = get_parent().get_parent().get_node("Player")
+
+func _onready():
+	print(player)
 
 var bullet = preload("res://bullet.tscn")
 
