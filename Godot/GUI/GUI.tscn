@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7b04mt1cd4ao"]
+[gd_scene load_steps=5 format=3 uid="uid://c7b04mt1cd4ao"]
 
 [ext_resource type="Texture2D" uid="uid://bnuqjn0m1qvje" path="res://sprites/coin.png" id="1_swf2a"]
 [ext_resource type="Script" path="res://GUI/GUI.gd" id="1_ut6e6"]
+[ext_resource type="Texture2D" uid="uid://cc58kgb2r4xrl" path="res://sprites/Health.png" id="3_2fk0s"]
+[ext_resource type="Texture2D" uid="uid://do4nns8ey5j2e" path="res://sprites/Health_empty.png" id="4_1xbvq"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_ut6e6")
@@ -41,4 +43,30 @@ layout_mode = 2
 
 [node name="Coins" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "You have this much money"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Empty_hearts" type="TextureRect" parent="Control/MarginContainer/VBoxContainer3/Control"]
+texture_filter = 1
+layout_mode = 2
+offset_top = -36.0
+offset_right = 96.0
+offset_bottom = -4.0
+texture = ExtResource("4_1xbvq")
+stretch_mode = 1
+
+[node name="Full_hearts" type="TextureRect" parent="Control/MarginContainer/VBoxContainer3/Control"]
+texture_filter = 1
+layout_mode = 2
+offset_top = -36.0
+offset_right = 64.0
+offset_bottom = -4.0
+texture = ExtResource("3_2fk0s")
+stretch_mode = 1

@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GlobalSignals="*res://Signal/GlobalSignals.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [input]
 
 right={

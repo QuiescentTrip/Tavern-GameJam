@@ -55,4 +55,5 @@ func fire():
 		cooldown.start()
 
 func onkill():
+	GlobalSignals.update_coins.emit(10, false)
 	queue_free()

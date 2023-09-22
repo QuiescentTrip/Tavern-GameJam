@@ -2,15 +2,15 @@ extends CharacterBody2D
 
 class_name Player
 
-var center = Vector2()
-var damping = 12.0
+var shield_degen = 0.5
+var shield = 100
 var team = 0
-var friction = 0.18
 var speed = 500
-var bulletspeed = 4000
+var coins = 0
 var empty = true
 var shielded = false
 var invincible = false
+
 @onready var invincible_timer = $invincible
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var end = $Marker2D
@@ -23,6 +23,17 @@ func _ready():
 	
 	
 func _physics_process(_delta: float) -> void:
+	print(shield)
+	if shielded:
+		shield = max(shield - shield_degen, 0)
+	elif shield < 100 and !shielded :
+		var regen = shield + (shield_degen / 2)
+		shield = min(regen, 100)
+	
+	if shield <= 0:
+		$Sprite2D.visible = false
+		shielded = false
+	
 	var direction := Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -51,12 +62,12 @@ func fire():
 	empty = true
 	
 func _input(event):
-	if event.is_action_pressed("RMB"):
-		$Sprite2D.visible = not $Sprite2D.visible
+	if event.is_action_pressed("RMB") and shield >= 0:
+		$Sprite2D.visible = true
 		shielded = true
 		
 	elif event.is_action_released("RMB"):
-		$Sprite2D.visible = not $Sprite2D.visible
+		$Sprite2D.visible = false
 		shielded = false
 	
 func onkill():
