@@ -3,10 +3,11 @@ extends Node2D
 @onready var Basic_Enemy = preload("res://Enemies/Basic_Enemy.tscn")
 @onready var player = get_parent().get_node("Player")
 
-var y = round(1500 - 16.25)
-var x = round(2400 - 577.485)
-var xpos = 577
-var ypos = 16
+
+var y = round(-789.3276)
+var x = round(-711.9944)
+var xpos = round(1784.129)
+var ypos = round(865.9188)
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -20,10 +21,10 @@ func _process(delta):
 
 func _on_timer_timeout():
 	var pos = Vector2(randi_range(xpos, x), randi_range(ypos, y))
-	if player.position.distance_to(player.position) < 500:
+	
+	if pos.distance_to(player.position) > 600:
 		var enemy = Basic_Enemy.instantiate()
 		enemy.position = pos
-		print(enemy.global_position)
 		add_child(enemy)
 		$Timer.start()
 	else:

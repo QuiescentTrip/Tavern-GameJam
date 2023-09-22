@@ -10,28 +10,37 @@ var direction
 @onready var end = $Marker2D
 @onready var player = get_parent().get_parent().get_node("Player")
 
-func _onready():
-	print(player)
-
 var bullet = preload("res://bullet.tscn")
 
 
 func _physics_process(_delta) -> void:
 	if player != null:
+		
 		var distance_to = position.distance_to(player.position)
+		var target = (player.position - position).normalized()
+		
 		if  distance_to > 300 and distance_to < 1000:
 			look_at(player.global_position)
-			var target = (player.position - self.global_position).normalized()
-			direction =  target * speed
-			if position.distance_to(player.position) > 200:
-				if direction.length() > 1.0:
-					direction = direction.normalized()
-				var target_velocity = direction * speed
-				velocity += (target_velocity - velocity) * friction
 			
-				move_and_slide()
-			fire()
-		elif(distance_to <= 300):
+		direction =  target * speed
+		
+		if direction.length() > 1.0:
+			direction = direction.normalized()
+			
+		if distance_to > 600 and distance_to < 1000:
+				
+			var target_velocity = direction * speed
+			velocity += (target_velocity - velocity) * friction
+				
+		elif distance_to < 400:
+				
+			var target_velocity = -direction * speed
+			velocity += (target_velocity - velocity) * friction
+			
+		
+		move_and_slide()
+			
+		if(distance_to <= 600):
 			look_at(player.global_position)
 			fire()
 		

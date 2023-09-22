@@ -9,17 +9,17 @@ var friction = 0.18
 var speed = 500
 var bulletspeed = 4000
 var empty = true
-
+var shielded = false
+var invincible = false
+@onready var invincible_timer = $invincible
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var end = $Marker2D
-#var player = preload("res://Player/Player.tscn")
 var bullet = preload("res://bullet.tscn")
 
 var _velocity := Vector2.ZERO
 
 func _ready():	
-	#player.instantiate()
-	pass
+	$Sprite2D.visible = not $Sprite2D.visible
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -28,13 +28,16 @@ func _physics_process(_delta: float) -> void:
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 	
+	if invincible_timer.is_stopped():
+		invincible = false
+		
 	if direction.length() > 1.0:
 		direction = direction.normalized()
 	
 	velocity = speed * direction
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("LMB") and !empty:
+	if Input.is_action_just_pressed("LMB") and !empty and !shielded:
 		fire()
 	
 	look_at(get_global_mouse_position())
@@ -47,12 +50,29 @@ func fire():
 	GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 0)
 	empty = true
 	
+func _input(event):
+	if event.is_action_pressed("RMB"):
+		$Sprite2D.visible = not $Sprite2D.visible
+		shielded = true
+		
+	elif event.is_action_released("RMB"):
+		$Sprite2D.visible = not $Sprite2D.visible
+		shielded = false
 	
 func onkill():
-	if !empty:
+	if !empty and !shielded and !invincible:
+		$Death.play()
 		get_tree().paused = true
-		queue_free()
+		if !$Death.playing:
+			queue_free()
+	elif shielded:
+		invincible_timer.start()
+		pass
 	else:
+		if invincible_timer.is_stopped():
+			invincible_timer.start()
+			invincible = true
+		$Pickup.play()
 		AnimatedSprite.frame = 1
 		empty = false
 		
