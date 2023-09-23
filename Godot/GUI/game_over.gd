@@ -6,5 +6,6 @@ func _on_restart_pressed():
 
 
 func _on_continue_pressed():
-	GlobalSignals.update_coins.emit(10, 1)
-	GlobalSignals.continued.emit()
+	if GlobalVariables.coins >= 10:
+		GlobalSignals.update_coins.emit(10, 1)
+		GlobalSignals.continued.emit()

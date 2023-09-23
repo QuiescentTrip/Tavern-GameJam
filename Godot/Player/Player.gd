@@ -27,6 +27,9 @@ func _ready():
 	
 	
 func _physics_process(_delta: float) -> void:
+	if GlobalVariables.paused == true:
+		return
+		
 	if shielded:
 		shield = max(shield - shield_degen, 0)
 	elif shield < 100 and !shielded :
@@ -78,7 +81,6 @@ func onkill():
 		GlobalSignals.update_heart.emit(1, true)
 		GlobalVariables.hearts -= 1
 		if GlobalVariables.hearts == 0:
-			queue_free()
 			GlobalSignals.died.emit()
 	elif shielded:
 		invincible_timer.start()

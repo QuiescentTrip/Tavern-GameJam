@@ -17,12 +17,15 @@ func _ready():
 
 
 func _ondeath():
+	GlobalVariables.paused = true
 	add_child(gameover)
 	
 func _continued():
-	add_child(playerload.instantiate())
+	GlobalVariables.coins -= 10
+	GlobalVariables.hearts = 1
+	GlobalVariables.paused = false
 	remove_child(gameover)
-
+	
 func apply_camera(delta):
 	var mpos = get_global_mouse_position()
 	var ppos = player.global_position
@@ -31,5 +34,5 @@ func apply_camera(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if player != null:
+	if player != null and !GlobalVariables.paused:
 		apply_camera(delta)

@@ -21,6 +21,7 @@ func _changelevel():
 	
 func _change_level_label(level):
 	level_label.text = "LEVEL " + str(level)
+	level_label.set("theme_override_colors/font_color", Color(1,1,1,1))
 
 
 func _ready():
@@ -46,6 +47,7 @@ func _physics_process(_delta):
 		bar.value = player.shield
 	if leveltimer.is_stopped():
 		_changelevel()
+	level_label.set("theme_override_colors/font_color", lerp(level_label.get("theme_override_colors/font_color"), Color(1,1,1,0), 0.05))
 
 
 func _update_coins_label():

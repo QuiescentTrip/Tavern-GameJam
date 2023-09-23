@@ -14,6 +14,9 @@ var bullet = preload("res://bullet.tscn")
 
 
 func _physics_process(_delta) -> void:
+	if GlobalVariables.paused == true:
+		return
+		
 	if player != null:
 		
 		var distance_to = position.distance_to(player.position)
