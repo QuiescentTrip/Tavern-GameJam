@@ -32,22 +32,26 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 25
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 60
 text = "MAH GAME"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="Play" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 60
 text = "Begin"
 
-[node name="Quit" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="Quit" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 60
 text = "Exit"
 script = ExtResource("1_dyac6")
 
-[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/VBoxContainer2/Play" to="CanvasLayer/Control/MarginContainer/VBoxContainer/VBoxContainer2/Quit" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/VBoxContainer2/Quit" to="CanvasLayer/Control/MarginContainer/VBoxContainer/VBoxContainer2/Quit" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Play" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_pressed"]

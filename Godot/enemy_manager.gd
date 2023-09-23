@@ -10,13 +10,11 @@ var xpos = round(1784.129)
 var ypos = round(865.9188)
 var rng = RandomNumberGenerator.new()
 
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _physics_process(delta):
+	if GlobalVariables.paused:
+		$Timer.paused = true
+	else:
+		$Timer.paused = false
 
 
 func _on_timer_timeout():

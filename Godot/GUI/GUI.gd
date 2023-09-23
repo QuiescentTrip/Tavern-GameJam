@@ -9,6 +9,7 @@ class_name UI
 @onready var bar = $MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ProgressBar
 @onready var level_label = $MarginContainer/CenterContainer/Level
 
+
 @onready var leveltimer = get_parent().get_node("LevelTimer")
 @onready var song_1 = get_parent().get_node("Music1")
 var level_time
@@ -31,7 +32,7 @@ func _ready():
 	leveltimer.start()
 	GlobalSignals.update_coins.connect(_update_coins)
 	_update_coins_label()
-
+	
 
 
 var coins = 0:
@@ -43,8 +44,11 @@ var coins = 0:
 
 func _physics_process(_delta):
 	if GlobalVariables.paused:
-		leveltimer.stop()
+		leveltimer.paused = true
 		return
+	else:
+		leveltimer.paused = false
+	
 	progress_label.text = str(int(leveltimer.time_left))
 	if player != null:
 		bar.value = player.shield
@@ -64,4 +68,5 @@ func _update_coins(coins, negative):
 			self.coins -= coins
 	else:
 		self.coins += coins 
+	GlobalVariables.coins = self.coins 
 

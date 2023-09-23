@@ -28,7 +28,7 @@ theme_override_constants/margin_bottom = 120
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 120
+theme_override_constants/separation = 110
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -54,5 +54,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "RESTART"
 
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Main Menu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "MAIN MENU"
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/Main Menu" to="." method="_on_main_menu_pressed"]

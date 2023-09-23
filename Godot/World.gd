@@ -17,11 +17,12 @@ func _ready():
 
 
 func _ondeath():
+	song_1.stream_paused = true
 	GlobalVariables.paused = true
 	add_child(gameover)
 	
 func _continued():
-	GlobalVariables.coins -= 10
+	song_1.stream_paused = false
 	GlobalVariables.hearts = 1
 	GlobalVariables.paused = false
 	remove_child(gameover)

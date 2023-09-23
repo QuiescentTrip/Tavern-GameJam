@@ -9,24 +9,20 @@ script = ExtResource("1_gtcnk")
 
 [node name="Empty_hearts" type="TextureRect" parent="."]
 texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1120.0
-offset_bottom = -616.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 32.0
+offset_top = 568.0
+offset_right = 64.0
+offset_bottom = 600.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wx20w")
 stretch_mode = 1
 
 [node name="Full_hearts" type="TextureRect" parent="."]
 texture_filter = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1120.0
-offset_bottom = -616.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 32.0
+offset_top = 568.0
+offset_right = 64.0
+offset_bottom = 600.0
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_qqjwg")
 stretch_mode = 1

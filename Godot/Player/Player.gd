@@ -7,8 +7,6 @@ var shield = 100
 
 var team = 0
 var speed = 500
-var coins = 0
-
 var empty = true
 var shielded = false
 var invincible = false
@@ -17,14 +15,16 @@ var invincible = false
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var end = $Marker2D
 var bullet = preload("res://bullet.tscn")
+var pause_screen = preload("res://Paused.tscn")
 
 var _velocity := Vector2.ZERO
 
 func _ready():
-	GlobalVariables.max_hearts = 2
-	GlobalVariables.hearts = 2
 	$Sprite2D.visible = not $Sprite2D.visible
 	
+func _input(event):
+	if event.is_action_pressed("escape") and !GlobalVariables.paused:
+		get_parent().add_child()
 	
 func _physics_process(_delta: float) -> void:
 	if GlobalVariables.paused == true:

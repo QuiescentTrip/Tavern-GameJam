@@ -15,3 +15,5 @@ signal continued()
 signal levelchange()
 
 signal shop()
+
+signal resetglobal()
