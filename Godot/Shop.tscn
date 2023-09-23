@@ -1,18 +1,194 @@
-[gd_scene load_steps=4 format=3 uid="uid://batq8qorytek2"]
+[gd_scene load_steps=13 format=3 uid="uid://batq8qorytek2"]
 
+[ext_resource type="Script" path="res://Shop.gd" id="1_0jact"]
 [ext_resource type="PackedScene" uid="uid://c7b04mt1cd4ao" path="res://GUI/GUI.tscn" id="1_rxxf3"]
 [ext_resource type="PackedScene" uid="uid://cdqg41xlkfgan" path="res://Player/Player.tscn" id="2_lhavf"]
 [ext_resource type="PackedScene" uid="uid://ds0eon55ea5ir" path="res://GUI/Health_UI.tscn" id="3_fkoql"]
+[ext_resource type="AudioStream" uid="uid://cm6c8ypdbhpgr" path="res://music/untitled.wav" id="4_ie406"]
+[ext_resource type="Texture2D" uid="uid://bdvmuli1imlrc" path="res://sprites/Addition_heart.png" id="5_bsek3"]
+[ext_resource type="Texture2D" uid="uid://bbiadtdvtqabo" path="res://sprites/shield_sprite.png" id="6_srdkn"]
+[ext_resource type="Texture2D" uid="uid://bnuqjn0m1qvje" path="res://sprites/coin.png" id="6_xbt3g"]
+[ext_resource type="Texture2D" uid="uid://bdtaev4bm6ac8" path="res://sprites/Coin_multiplier.png" id="7_8xakc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qmk4q"]
+radius = 17.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_8yfnw"]
+specular_color = Color(0.976471, 0.760784, 0.168627, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx8wj"]
+size = Vector2(1.06931, 1.08911)
 
 [node name="Shop" type="Node2D"]
+script = ExtResource("1_0jact")
 
 [node name="GUI" parent="." instance=ExtResource("1_rxxf3")]
-
-[node name="Player" parent="." instance=ExtResource("2_lhavf")]
-position = Vector2(216, 122)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Health_UI" parent="." instance=ExtResource("3_fkoql")]
 
 [node name="LevelTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ie406")
+autoplay = true
+
+[node name="Heart" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(150, -200)
+scale = Vector2(2, 2)
+texture = ExtResource("5_bsek3")
+
+[node name="Label" type="Label" parent="Heart"]
+offset_left = -38.0
+offset_top = -33.0
+offset_right = 569.0
+offset_bottom = 126.0
+scale = Vector2(0.114432, 0.122866)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "+1 Heart
+"
+horizontal_alignment = 1
+
+[node name="Heart" type="Area2D" parent="Heart"]
+position = Vector2(-0.5, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heart/Heart"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_qmk4q")
+
+[node name="Price" type="Label" parent="Heart"]
+offset_left = -4.0
+offset_top = 16.0
+offset_right = 603.0
+offset_bottom = 175.0
+scale = Vector2(0.114432, 0.122866)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "Test"
+
+[node name="TextureRect" type="TextureRect" parent="Heart/Price"]
+layout_mode = 0
+offset_left = -117.974
+offset_right = -77.974
+offset_bottom = 40.0
+scale = Vector2(2.72967, 2.72967)
+texture = ExtResource("6_xbt3g")
+
+[node name="Shield" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -200)
+scale = Vector2(2, 2)
+texture = ExtResource("6_srdkn")
+
+[node name="Label" type="Label" parent="Shield"]
+offset_left = -35.0
+offset_top = -33.5
+offset_right = 572.0
+offset_bottom = 125.5
+scale = Vector2(0.114432, 0.122866)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "+Shield regen
+"
+horizontal_alignment = 1
+
+[node name="Price" type="Label" parent="Shield"]
+offset_left = -3.99997
+offset_top = 16.0
+offset_right = 603.0
+offset_bottom = 175.0
+scale = Vector2(0.114432, 0.122866)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "Test"
+
+[node name="TextureRect" type="TextureRect" parent="Shield/Price"]
+layout_mode = 0
+offset_left = -117.974
+offset_right = -77.974
+offset_bottom = 40.0
+scale = Vector2(2.72967, 2.72967)
+texture = ExtResource("6_xbt3g")
+
+[node name="Shield" type="Area2D" parent="Shield"]
+position = Vector2(0, -0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield/Shield"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_qmk4q")
+
+[node name="Coin" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-150, -200)
+scale = Vector2(2, 2)
+texture = ExtResource("7_8xakc")
+
+[node name="Label2" type="Label" parent="Coin"]
+offset_left = -35.0
+offset_top = -33.5
+offset_right = 572.0
+offset_bottom = 125.5
+scale = Vector2(0.114432, 0.122866)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "Coin multiplier"
+horizontal_alignment = 1
+
+[node name="Price" type="Label" parent="Coin"]
+offset_left = -5.5
+offset_top = 15.0
+offset_right = 601.5
+offset_bottom = 174.0
+scale = Vector2(0.114432, 0.122866)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "Test"
+
+[node name="TextureRect" type="TextureRect" parent="Coin/Price"]
+layout_mode = 0
+offset_left = -117.974
+offset_right = -77.974
+offset_bottom = 40.0
+scale = Vector2(2.72967, 2.72967)
+texture = ExtResource("6_xbt3g")
+
+[node name="Coin" type="Area2D" parent="Coin"]
+position = Vector2(-0.5, -0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin/Coin"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CircleShape2D_qmk4q")
+
+[node name="Back" type="Sprite2D" parent="."]
+modulate = Color(0.976471, 0.760784, 0.168627, 1)
+position = Vector2(0, 323.555)
+scale = Vector2(50.5, 50.5)
+texture = SubResource("CanvasTexture_8yfnw")
+
+[node name="Area2D" type="Area2D" parent="Back"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Back/Area2D"]
+position = Vector2(7.08174e-09, -0.00990105)
+shape = SubResource("RectangleShape2D_tx8wj")
+
+[node name="Player" parent="." instance=ExtResource("2_lhavf")]
+position = Vector2(0, 106)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -26.235
+offset_top = 273.585
+offset_right = 173.765
+offset_bottom = 373.585
+scale = Vector2(0.262258, 0.281587)
+theme_override_colors/font_color = Color(0.976471, 0.760784, 0.168627, 1)
+theme_override_font_sizes/font_size = 71
+text = "back"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Heart/Heart" to="." method="_on_heart_body_entered"]
+[connection signal="body_entered" from="Shield/Shield" to="." method="_on_shield_body_entered"]
+[connection signal="body_entered" from="Coin/Coin" to="." method="_on_coin_body_entered"]
+[connection signal="body_entered" from="Back/Area2D" to="." method="_on_area_2d_body_entered"]

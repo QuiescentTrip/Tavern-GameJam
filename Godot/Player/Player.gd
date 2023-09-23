@@ -28,10 +28,12 @@ func _physics_process(_delta: float) -> void:
 	if GlobalVariables.paused == true:
 		return
 		
+	
+	
 	if shielded:
 		shield = max(shield - shield_degen, 0)
 	elif shield < 100 and !shielded :
-		var regen = shield + 0.25
+		var regen = (shield + 0.25) * GlobalVariables.shield_regen
 		shield = min(regen, 100)
 	
 	if shield <= 0:

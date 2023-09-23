@@ -10,6 +10,9 @@ var xpos = round(1784.129)
 var ypos = round(865.9188)
 var rng = RandomNumberGenerator.new()
 
+func _ready():
+	$Timer.wait_time = GlobalVariables.level
+
 func _physics_process(delta):
 	if GlobalVariables.paused:
 		$Timer.paused = true

@@ -7,8 +7,6 @@ var direction := Vector2.ZERO
 var speed = 15
 @onready var player = get_parent().get_parent().get_node("Player")
 
-func _ready():
-	$Timer.start()
 # Called when the node enters the scene tree for the first time.
 
 func set_direction(direction):
@@ -16,6 +14,8 @@ func set_direction(direction):
 	rotation += direction.angle()
 
 func _physics_process(delta):
+	if GlobalVariables.paused:
+		return
 	if direction != Vector2.ZERO:
 		var velocity = direction * speed
 		global_position += velocity
@@ -28,8 +28,3 @@ func _on_body_entered(body):
 		GlobalSignals.update_coins.emit(10, 1)
 	queue_free()
 
-
-func _on_timer_timeout():
-	if team == 0:
-		GlobalSignals.update_coins.emit(10, 1)
-	queue_free()

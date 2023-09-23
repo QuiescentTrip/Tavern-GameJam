@@ -2,17 +2,18 @@ extends Node2D
 
 @onready var bullet_manager = $bullet_manager
 @onready var player = $Player
-@onready var leveltimer = $LevelTimer
 @onready var gameoverscreen = preload("res://GUI/game_over.tscn")
 var playerload = preload("res://Player/Player.tscn")
 
 var song_select
 var song = null
 var gameover = null
+var color = null
+var count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	song_select = 1
+	song_select = GlobalVariables.level % 2
 	song = get_node("Music" + str(song_select))
 	song.play()
 	GlobalSignals.died.connect(_ondeath)
@@ -40,6 +41,10 @@ func apply_camera(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	count+=0.0005
+	color = Color.from_hsv(sin(count), 0.49, 0.46)
+	RenderingServer.set_default_clear_color(color)
+	
 	song.stream_paused = GlobalVariables.paused
 	
 	if player != null and !GlobalVariables.paused:

@@ -26,8 +26,9 @@ func _change_level_label(level):
 
 
 func _ready():
+	level = GlobalVariables.level
 	if get_parent().name == "World":
-		var current_song = 1
+		var current_song = GlobalVariables.level % 2
 		song = get_parent().get_node("Music" + str(current_song))
 		_change_level_label(level)
 		level_time = int(song.stream.get_length())
@@ -36,17 +37,12 @@ func _ready():
 	else:
 		level_label.text = "SHOP"
 		level_label.set("theme_override_colors/font_color", Color(1,1,1,1))
+		GlobalVariables.level += 1
+		GlobalVariables.hearts = GlobalVariables.max_hearts
 		
 	GlobalSignals.update_coins.connect(_update_coins)
 	_update_coins_label()
 	
-
-
-var coins = 0:
-	set(new_coins):
-		coins = new_coins
-		_update_coins_label()
-
 
 
 func _physics_process(_delta):
@@ -67,15 +63,15 @@ func _physics_process(_delta):
 
 
 func _update_coins_label():
-	coin_label.text = "x" + str(coins)
+	coin_label.text = "x" + str(GlobalVariables.coins)
 
 func _update_coins(coins, negative):
 	if negative:
-		if self.coins < coins:
+		if GlobalVariables.coins < coins:
 			coins = 0
 		else:
-			self.coins -= coins
+			GlobalVariables.coins -= coins
 	else:
-		self.coins += coins 
-	GlobalVariables.coins = self.coins 
+		GlobalVariables.coins += coins 
+	_update_coins_label()
 

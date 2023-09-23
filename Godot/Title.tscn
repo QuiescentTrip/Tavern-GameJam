@@ -37,21 +37,30 @@ theme_override_constants/separation = 25
 [node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "MAH GAME"
+text = "Mell0 BEST CAT"
 
 [node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Play" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 text = "Begin"
+
+[node name="How2Play" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "How to Play"
 
 [node name="Quit" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 text = "Exit"
 script = ExtResource("1_dyac6")
 
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
 [connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Play" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/How2Play" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_pressed"]
