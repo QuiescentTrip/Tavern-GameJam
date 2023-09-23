@@ -15,16 +15,14 @@ var invincible = false
 @onready var AnimatedSprite = $AnimatedSprite2D
 @onready var end = $Marker2D
 var bullet = preload("res://bullet.tscn")
-var pause_screen = preload("res://Paused.tscn")
+var paused = preload("res://Paused.tscn")
+var paused_screen
 
 var _velocity := Vector2.ZERO
-
 func _ready():
 	$Sprite2D.visible = not $Sprite2D.visible
 	
-func _input(event):
-	if event.is_action_pressed("escape") and !GlobalVariables.paused:
-		get_parent().add_child()
+
 	
 func _physics_process(_delta: float) -> void:
 	if GlobalVariables.paused == true:
@@ -68,16 +66,23 @@ func fire():
 	empty = true
 	
 func _input(event):
+	if event.is_action_pressed("escape") and !GlobalVariables.paused:
+		paused_screen = paused.instantiate()
+		get_parent().add_child(paused_screen)
+		GlobalVariables.paused = true
+	elif event.is_action_pressed("escape") and GlobalVariables.paused:
+		get_parent().remove_child(paused_screen)
+		GlobalVariables.paused = false
+	
 	if event.is_action_pressed("RMB") and shield >= 0:
 		$Sprite2D.visible = true
 		shielded = true
-		
 	elif event.is_action_released("RMB"):
 		$Sprite2D.visible = false
 		shielded = false
 	
 func onkill():
-	if !empty: #and !shielded and !invincible:
+	if !empty and !shielded and !invincible:
 		GlobalSignals.update_heart.emit(1, true)
 		GlobalVariables.hearts -= 1
 		if GlobalVariables.hearts == 0:

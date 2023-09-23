@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqq6btgo5oqa2"]
+[gd_scene load_steps=7 format=3 uid="uid://bqq6btgo5oqa2"]
 
 [ext_resource type="Script" path="res://GUI/game_over.gd" id="1_klosl"]
+[ext_resource type="Texture2D" uid="uid://cc58kgb2r4xrl" path="res://sprites/Health.png" id="2_e774r"]
+[ext_resource type="Texture2D" uid="uid://bnuqjn0m1qvje" path="res://sprites/coin.png" id="3_5aefb"]
+[ext_resource type="AudioStream" uid="uid://q5u0m8jee3hw" path="res://sfx/possible_death_sound.wav" id="4_4003h"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_gf8aa"]
 
@@ -44,7 +47,35 @@ size_flags_horizontal = 4
 layout_mode = 2
 theme_override_constants/separation = 310
 
-[node name="Continue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HP_plus" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.117647, 0.737255, 0.45098, 1)
+text = "+1"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_e774r")
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Minus_coins" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353, 0.137255, 0.203922, 1)
+text = "TEST"
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_5aefb")
+
+[node name="Continue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "CONTINUE"
@@ -62,6 +93,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "MAIN MENU"
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4003h")
+autoplay = true
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2/Main Menu" to="." method="_on_main_menu_pressed"]

@@ -1,14 +1,30 @@
 extends CanvasLayer
 
+@onready var minus_coins = $PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer/Minus_coins
+@onready var continue_button = $PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/VBoxContainer/Continue
+
+var coins_needed
+
+func _ready():
+	print(GlobalVariables.deaths)
+	coins_needed = GlobalVariables.deaths * 100 
+	minus_coins.text = "-" + str(coins_needed)
+	if(GlobalVariables.coins < coins_needed):
+		continue_button.disabled = true
+	else:
+		continue_button.disabled = false
+	
+
 
 func _on_restart_pressed():
+	GlobalSignals.resetglobal.emit()
 	GlobalVariables.paused = false
 	get_tree().change_scene_to_file("res://World.tscn")
 
 
 func _on_continue_pressed():
-	if GlobalVariables.coins >= 10:
-		GlobalSignals.update_coins.emit(10, 1)
+	if GlobalVariables.coins >= coins_needed:
+		GlobalSignals.update_coins.emit(coins_needed, 1)
 		GlobalSignals.continued.emit()
 		GlobalSignals.resetglobal.emit()
 

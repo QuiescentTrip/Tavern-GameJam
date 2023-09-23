@@ -11,9 +11,9 @@ class_name UI
 
 
 @onready var leveltimer = get_parent().get_node("LevelTimer")
-@onready var song_1 = get_parent().get_node("Music1")
-var level_time
 
+var level_time
+var song
 var level = 1
 
 func _changelevel():
@@ -26,8 +26,12 @@ func _change_level_label(level):
 
 
 func _ready():
+	var current_song = 1
+	print(current_song)
+	song = get_parent().get_node("Music" + str(current_song))
 	_change_level_label(level)
-	level_time = int(song_1.stream.get_length())
+	print(song)
+	level_time = int(song.stream.get_length())
 	leveltimer.set_wait_time(level_time)
 	leveltimer.start()
 	GlobalSignals.update_coins.connect(_update_coins)

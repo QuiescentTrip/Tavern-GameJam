@@ -47,7 +47,6 @@ position = Vector2(216, 122)
 
 [node name="Music1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_4il6c")
-autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
