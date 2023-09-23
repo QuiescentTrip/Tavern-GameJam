@@ -1,29 +1,35 @@
 extends CanvasLayer
 class_name UI
 
-@onready var coin_label = $Control/MarginContainer/VBoxContainer/HBoxContainer/Control/Coins
-@onready var player = get_parent().get_node("Player")
-@onready var bar = $Control/MarginContainer/VBoxContainer3/Control2/ProgressBar
-@onready var full_hearts = $Control/MarginContainer/VBoxContainer3/Control/Full_hearts
-@onready var empty_hearts = $Control/MarginContainer/VBoxContainer3/Control/Empty_hearts
+@onready var coin_label = $MarginContainer/VBoxContainer/HBoxContainer/Coins
 
-@onready var progress_label = $Control/MarginContainer/VBoxContainer3/Control2/ProgressLabel
+@onready var player = get_parent().get_node("Player")
+
+@onready var progress_label = $MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ProgressLabel
+@onready var bar = $MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer/ProgressBar
+@onready var level_label = $MarginContainer/CenterContainer/Level
+
 @onready var leveltimer = get_parent().get_node("LevelTimer")
 @onready var song_1 = get_parent().get_node("Music1")
 var level_time
 
+var level = 1
+
+func _changelevel():
+	level += 1
+	_change_level_label(level)
+	
+func _change_level_label(level):
+	level_label.text = "LEVEL " + str(level)
+
 
 func _ready():
+	_change_level_label(level)
 	level_time = int(song_1.stream.get_length())
 	leveltimer.set_wait_time(level_time)
 	leveltimer.start()
-	
-	empty_hearts.size.x = 32 * player.max_hearts
-	full_hearts.size.x = 32 * player.hearts
-	
 	GlobalSignals.update_coins.connect(_update_coins)
 	_update_coins_label()
-	GlobalSignals.update_heart.connect(_update_hearts)
 
 
 
@@ -38,6 +44,8 @@ func _physics_process(_delta):
 	progress_label.text = str(int(leveltimer.time_left))
 	if player != null:
 		bar.value = player.shield
+	if leveltimer.is_stopped():
+		_changelevel()
 
 
 func _update_coins_label():
@@ -51,10 +59,4 @@ func _update_coins(coins, negative):
 			self.coins -= coins
 	else:
 		self.coins += coins 
-
-func _update_hearts(hearts, negative):
-	if negative:
-		full_hearts.size.x -= 32 * hearts
-	if !negative:
-		full_hearts.size.x += 32 * hearts
 

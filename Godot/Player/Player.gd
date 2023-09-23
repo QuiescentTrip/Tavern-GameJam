@@ -2,9 +2,6 @@ extends CharacterBody2D
 
 class_name Player
 
-var max_hearts = 1
-var hearts = 1
-
 var shield_degen = 2
 var shield = 100
 
@@ -24,6 +21,8 @@ var bullet = preload("res://bullet.tscn")
 var _velocity := Vector2.ZERO
 
 func _ready():
+	GlobalVariables.max_hearts = 2
+	GlobalVariables.hearts = 2
 	$Sprite2D.visible = not $Sprite2D.visible
 	
 	
@@ -77,8 +76,8 @@ func _input(event):
 func onkill():
 	if !empty: #and !shielded and !invincible:
 		GlobalSignals.update_heart.emit(1, true)
-		hearts -= 1
-		if hearts == 0:
+		GlobalVariables.hearts -= 1
+		if GlobalVariables.hearts == 0:
 			queue_free()
 			GlobalSignals.died.emit()
 	elif shielded:

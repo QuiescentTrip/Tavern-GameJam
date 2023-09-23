@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c38ll0ycvi8wd"]
+[gd_scene load_steps=12 format=3 uid="uid://c38ll0ycvi8wd"]
 
 [ext_resource type="Script" path="res://bullet_manager.gd" id="1_glbaw"]
 [ext_resource type="Script" path="res://World.gd" id="1_kwgfm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c7b04mt1cd4ao" path="res://GUI/GUI.tscn" id="2_xk73r"]
 [ext_resource type="AudioStream" uid="uid://clkeaxk46gepw" path="res://music/Longest_song_final.wav" id="6_4il6c"]
 [ext_resource type="Texture2D" uid="uid://cq0kwh3vsbplk" path="res://sprites/Wall.png" id="6_66vul"]
+[ext_resource type="PackedScene" uid="uid://ds0eon55ea5ir" path="res://GUI/Health_UI.tscn" id="8_rty4m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_reu1t"]
 texture = ExtResource("6_66vul")
@@ -65,5 +66,7 @@ scale = Vector2(70.1623, -79.5567)
 shape = SubResource("RectangleShape2D_n6tv2")
 
 [node name="LevelTimer" type="Timer" parent="."]
+
+[node name="Health_UI" parent="." instance=ExtResource("8_rty4m")]
 
 [connection signal="timeout" from="enemy_manager/Timer" to="enemy_manager" method="_on_timer_timeout"]

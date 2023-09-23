@@ -9,3 +9,9 @@ signal update_heart(hearts, negative)
 signal max_health(hearts)
 
 signal died()
+
+signal continued()
+
+signal levelchange()
+
+signal shop()
