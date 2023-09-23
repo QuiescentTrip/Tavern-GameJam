@@ -26,14 +26,17 @@ func _change_level_label(level):
 
 
 func _ready():
-	var current_song = 1
-	print(current_song)
-	song = get_parent().get_node("Music" + str(current_song))
-	_change_level_label(level)
-	print(song)
-	level_time = int(song.stream.get_length())
-	leveltimer.set_wait_time(level_time)
-	leveltimer.start()
+	if get_parent().name == "World":
+		var current_song = 1
+		song = get_parent().get_node("Music" + str(current_song))
+		_change_level_label(level)
+		level_time = int(song.stream.get_length())
+		leveltimer.set_wait_time(level_time)
+		leveltimer.start()
+	else:
+		level_label.text = "SHOP"
+		level_label.set("theme_override_colors/font_color", Color(1,1,1,1))
+		
 	GlobalSignals.update_coins.connect(_update_coins)
 	_update_coins_label()
 	
@@ -47,17 +50,19 @@ var coins = 0:
 
 
 func _physics_process(_delta):
-	if GlobalVariables.paused:
-		leveltimer.paused = true
-		return
-	else:
-		leveltimer.paused = false
+	if get_parent().name == "World":
+		if GlobalVariables.paused:
+			leveltimer.paused = true
+			return
+		else:
+			leveltimer.paused = false
 	
-	progress_label.text = str(int(leveltimer.time_left))
-	if player != null:
-		bar.value = player.shield
-	if leveltimer.is_stopped():
-		_changelevel()
+		progress_label.text = str(int(leveltimer.time_left))
+		if player != null:
+			bar.value = player.shield
+		if leveltimer.is_stopped():
+			_changelevel()
+	
 	level_label.set("theme_override_colors/font_color", lerp(level_label.get("theme_override_colors/font_color"), Color(1,1,1,0), 0.05))
 
 

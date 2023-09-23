@@ -47,4 +47,4 @@ func _physics_process(delta):
 
 
 func _on_level_timer_timeout():
-	get_tree().change_scene_to_file("sho")
+	get_tree().change_scene_to_file("res://Shop.tscn")

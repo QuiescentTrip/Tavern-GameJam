@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://batq8qorytek2"]
+[gd_scene load_steps=4 format=3 uid="uid://batq8qorytek2"]
+
+[ext_resource type="PackedScene" uid="uid://c7b04mt1cd4ao" path="res://GUI/GUI.tscn" id="1_rxxf3"]
+[ext_resource type="PackedScene" uid="uid://cdqg41xlkfgan" path="res://Player/Player.tscn" id="2_lhavf"]
+[ext_resource type="PackedScene" uid="uid://ds0eon55ea5ir" path="res://GUI/Health_UI.tscn" id="3_fkoql"]
 
 [node name="Shop" type="Node2D"]
+
+[node name="GUI" parent="." instance=ExtResource("1_rxxf3")]
+
+[node name="Player" parent="." instance=ExtResource("2_lhavf")]
+position = Vector2(216, 122)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Health_UI" parent="." instance=ExtResource("3_fkoql")]
+
+[node name="LevelTimer" type="Timer" parent="."]
