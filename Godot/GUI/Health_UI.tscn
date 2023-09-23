@@ -4,21 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://do4nns8ey5j2e" path="res://sprites/Health_empty.png" id="2_wx20w"]
 [ext_resource type="Texture2D" uid="uid://cc58kgb2r4xrl" path="res://sprites/Health.png" id="3_qqjwg"]
 
-[node name="Health_UI" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Health_UI" type="CanvasLayer"]
 script = ExtResource("1_gtcnk")
 
 [node name="Empty_hearts" type="TextureRect" parent="."]
 texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1120.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_wx20w")
 stretch_mode = 1
 
 [node name="Full_hearts" type="TextureRect" parent="."]
 texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1120.0
+offset_bottom = -616.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_qqjwg")
 stretch_mode = 1

@@ -42,6 +42,9 @@ var coins = 0:
 
 
 func _physics_process(_delta):
+	if GlobalVariables.paused:
+		leveltimer.stop()
+		return
 	progress_label.text = str(int(leveltimer.time_left))
 	if player != null:
 		bar.value = player.shield

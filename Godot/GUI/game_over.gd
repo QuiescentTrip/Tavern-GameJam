@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 func _on_restart_pressed():
+	GlobalVariables.paused = false
 	get_tree().change_scene_to_file("res://World.tscn")
 
 
