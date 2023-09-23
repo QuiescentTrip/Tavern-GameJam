@@ -36,3 +36,5 @@ autostart = true
 
 [node name="Shot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_edh0e")
+
+[node name="onscreen" type="VisibleOnScreenNotifier2D" parent="."]

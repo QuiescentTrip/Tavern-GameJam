@@ -40,11 +40,10 @@ func _physics_process(_delta) -> void:
 		
 		move_and_slide()
 			
-		if(distance_to <= 600):
+		if($onscreen.is_on_screen()):
 			look_at(player.global_position)
 			fire()
 		
-	
 
 func fire():
 	if cooldown.is_stopped():

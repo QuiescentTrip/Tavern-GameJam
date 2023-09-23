@@ -25,12 +25,11 @@ func _on_body_entered(body):
 	if(body.has_method("onkill") and body.team != self.team):
 		body.onkill()
 	elif self.team == 0:
-		player.bulletkill()
-		queue_free()
+		GlobalSignals.update_coins.emit(10, 1)
 	queue_free()
 
 
 func _on_timer_timeout():
 	if team == 0:
-		player.bulletkill()
+		GlobalSignals.update_coins.emit(10, 1)
 	queue_free()

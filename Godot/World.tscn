@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdqg41xlkfgan" path="res://Player/Player.tscn" id="1_v1gjv"]
 [ext_resource type="Script" path="res://enemy_manager.gd" id="2_rpuov"]
 [ext_resource type="PackedScene" uid="uid://c7b04mt1cd4ao" path="res://GUI/GUI.tscn" id="2_xk73r"]
-[ext_resource type="AudioStream" uid="uid://dia4wh8kteyq5" path="res://music/whaaa.wav" id="5_wp6un"]
+[ext_resource type="AudioStream" uid="uid://clkeaxk46gepw" path="res://music/Longest_song_final.wav" id="6_4il6c"]
 [ext_resource type="Texture2D" uid="uid://cq0kwh3vsbplk" path="res://sprites/Wall.png" id="6_66vul"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_reu1t"]
@@ -34,7 +34,7 @@ script = ExtResource("1_kwgfm")
 script = ExtResource("2_rpuov")
 
 [node name="Timer" type="Timer" parent="enemy_manager"]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
@@ -45,10 +45,11 @@ script = ExtResource("1_glbaw")
 position = Vector2(216, 122)
 
 [node name="Music1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_wp6un")
+stream = ExtResource("6_4il6c")
 autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(153, -7)

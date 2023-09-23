@@ -15,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
@@ -35,14 +36,28 @@ size_flags_vertical = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/Control"]
+texture_filter = 1
+layout_mode = 2
+offset_left = 3.0
+offset_top = -12.0
+offset_right = 35.0
+offset_bottom = 20.0
+scale = Vector2(1.61806, 1.61806)
 texture = ExtResource("1_swf2a")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+[node name="Coins" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer/Control"]
+texture_filter = 1
 layout_mode = 2
-
-[node name="Coins" type="Label" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
+offset_left = 35.0
+offset_top = 21.0
+offset_right = 68.0
+offset_bottom = 47.0
+scale = Vector2(1.19979, 1.1961)
+text = "Test"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
@@ -56,17 +71,43 @@ size_flags_vertical = 4
 [node name="Empty_hearts" type="TextureRect" parent="Control/MarginContainer/VBoxContainer3/Control"]
 texture_filter = 1
 layout_mode = 2
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = -4.0
+offset_left = -7.0
+offset_top = -62.0
+offset_right = 89.0
+offset_bottom = -30.0
+scale = Vector2(2.1313, 2.1313)
 texture = ExtResource("4_1xbvq")
 stretch_mode = 1
 
 [node name="Full_hearts" type="TextureRect" parent="Control/MarginContainer/VBoxContainer3/Control"]
 texture_filter = 1
 layout_mode = 2
-offset_top = -36.0
-offset_right = 64.0
-offset_bottom = -4.0
+offset_left = -7.0
+offset_top = -62.0
+offset_right = 57.0
+offset_bottom = -30.0
+scale = Vector2(2.144, 2.144)
 texture = ExtResource("3_2fk0s")
 stretch_mode = 1
+
+[node name="Control2" type="Control" parent="Control/MarginContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/MarginContainer/VBoxContainer3/Control2"]
+layout_mode = 0
+offset_left = 804.0
+offset_top = -60.0
+offset_right = 1085.0
+offset_bottom = -8.0
+show_percentage = false
+
+[node name="ProgressLabel" type="Label" parent="Control/MarginContainer/VBoxContainer3/Control2"]
+layout_mode = 0
+offset_left = 928.0
+offset_top = -105.0
+offset_right = 1160.0
+offset_bottom = -24.9999
+scale = Vector2(0.63717, 0.547712)
+theme_override_font_sizes/font_size = 56
+text = "asdf"
+horizontal_alignment = 2

@@ -2,10 +2,21 @@ extends Node2D
 
 @onready var bullet_manager = $bullet_manager
 @onready var player = $Player
+@onready var song_1 = $Music1
+@onready var leveltimer = $LevelTimer
+@onready var gameoverscreen = preload("res://GUI/game_over.tscn")
+
+
+var level = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	GlobalSignals.died.connect(_ondeath)
+
+func _ondeath():
+	var gameover = gameoverscreen.instantiate()
+	add_child(gameover)
+	
 
 
 func apply_camera(delta):

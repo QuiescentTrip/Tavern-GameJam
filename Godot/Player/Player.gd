@@ -2,11 +2,16 @@ extends CharacterBody2D
 
 class_name Player
 
-var shield_degen = 0.5
+var max_hearts = 1
+var hearts = 1
+
+var shield_degen = 2
 var shield = 100
+
 var team = 0
 var speed = 500
 var coins = 0
+
 var empty = true
 var shielded = false
 var invincible = false
@@ -18,16 +23,15 @@ var bullet = preload("res://bullet.tscn")
 
 var _velocity := Vector2.ZERO
 
-func _ready():	
+func _ready():
 	$Sprite2D.visible = not $Sprite2D.visible
 	
 	
 func _physics_process(_delta: float) -> void:
-	print(shield)
 	if shielded:
 		shield = max(shield - shield_degen, 0)
 	elif shield < 100 and !shielded :
-		var regen = shield + (shield_degen / 2)
+		var regen = shield + 0.25
 		shield = min(regen, 100)
 	
 	if shield <= 0:
@@ -71,11 +75,12 @@ func _input(event):
 		shielded = false
 	
 func onkill():
-	if !empty and !shielded and !invincible:
-		$Death.play()
-		get_tree().paused = true
-		if !$Death.playing:
+	if !empty: #and !shielded and !invincible:
+		GlobalSignals.update_heart.emit(1, true)
+		hearts -= 1
+		if hearts == 0:
 			queue_free()
+			GlobalSignals.died.emit()
 	elif shielded:
 		invincible_timer.start()
 		pass

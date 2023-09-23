@@ -20,13 +20,13 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	var pos = Vector2(randi_range(xpos, x), randi_range(ypos, y))
-	
-	if pos.distance_to(player.position) > 600:aaa
-		var enemy = Basic_Enemy.instantiate()
-		enemy.position = pos
-		add_child(enemy)
-		$Timer.start()
-	else:
-		_on_timer_timeout()
+	if player != null:
+		var pos = Vector2(randi_range(xpos, x), randi_range(ypos, y))
+		if pos.distance_to(player.position) > 600:
+			var enemy = Basic_Enemy.instantiate()
+			enemy.position = pos
+			add_child(enemy)
+			$Timer.start()
+		else:
+			_on_timer_timeout()
 	
