@@ -1,33 +1,69 @@
-[gd_scene load_steps=6 format=3 uid="uid://5hcvsmt2jkty"]
+[gd_scene load_steps=9 format=3 uid="uid://5hcvsmt2jkty"]
 
 [ext_resource type="Script" path="res://Enemies/Basic_Enemy.gd" id="1_qcnfd"]
 [ext_resource type="AudioStream" uid="uid://d02q4y7okdr0o" path="res://sfx/sound.wav" id="2_edh0e"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_im3ep"]
+[ext_resource type="Texture2D" uid="uid://dnywgmt1k4imu" path="res://sprites/Triangle.png" id="2_f6pyi"]
+[ext_resource type="Texture2D" uid="uid://r5x22lubiojx" path="res://sprites/Polygon.png" id="3_p0ppq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x8d5u"]
 size = Vector2(54, 54)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p6oyw"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_im3ep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2qu5"]
+size = Vector2(11.3812, 15.0218)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynctj"]
+size = Vector2(32.115, 32.115)
 
 [node name="Basic_Enemy" type="CharacterBody2D"]
 script = ExtResource("1_qcnfd")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Square" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x8d5u")
+
+[node name="Sprite2D" type="Sprite2D" parent="Square"]
 scale = Vector2(54.2369, 53.79)
 texture = SubResource("CanvasTexture_im3ep")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_x8d5u")
+[node name="Triangle" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(4.74467, 3.59478)
+shape = SubResource("RectangleShape2D_s2qu5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Triangle"]
+texture_filter = 1
+position = Vector2(0, 2.65294e-07)
+scale = Vector2(0.355486, 0.469197)
+texture = ExtResource("2_f6pyi")
+
+[node name="short" type="Timer" parent="Triangle"]
+wait_time = 0.1
+one_shot = true
+
+[node name="long" type="Timer" parent="Triangle"]
+one_shot = true
+
+[node name="Polygon" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(-4.76837e-07, 4.76837e-07)
+scale = Vector2(1.68146, 1.68146)
+shape = SubResource("RectangleShape2D_ynctj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Polygon"]
+position = Vector2(2.83586e-07, -2.83586e-07)
+texture = ExtResource("3_p0ppq")
+
+[node name="short" type="Timer" parent="Polygon"]
+wait_time = 0.2
+one_shot = true
+
+[node name="long" type="Timer" parent="Polygon"]
+wait_time = 2.0
+one_shot = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(34, 0)
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(19.7037, 19.7037)
-shape = SubResource("CircleShape2D_p6oyw")
 
 [node name="cooldown" type="Timer" parent="."]
 wait_time = 0.7

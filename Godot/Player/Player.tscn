@@ -63,5 +63,7 @@ stream = ExtResource("5_ngywk")
 stream = ExtResource("6_dsfy5")
 
 [node name="invincible" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
+
+[node name="invincible2" type="Timer" parent="."]

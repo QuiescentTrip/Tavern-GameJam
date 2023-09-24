@@ -22,7 +22,6 @@ func _ready():
 
 
 func _ondeath():
-	GlobalVariables.deaths += 1
 	song.stream_paused = true
 	GlobalVariables.paused = true
 	add_child(gameover)
@@ -40,11 +39,13 @@ func apply_camera(delta):
 	$Camera2D.global_position = center	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	count+=0.0005
+func _process(delta):
+	if !delta < 1/60:
+		count+=0.00005
 	color = Color.from_hsv(sin(count), 0.49, 0.46)
 	RenderingServer.set_default_clear_color(color)
-	
+
+func _physics_process(delta):
 	song.stream_paused = GlobalVariables.paused
 	
 	if player != null and !GlobalVariables.paused:

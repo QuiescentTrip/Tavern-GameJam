@@ -5,6 +5,8 @@ const speed = 200.0
 const friction = 0.20
 var team = 1
 var direction
+var weapon = 0
+
 
 @onready var cooldown = $cooldown
 @onready var end = $Marker2D
@@ -12,6 +14,17 @@ var direction
 
 var bullet = preload("res://bullet.tscn")
 
+func _ready():
+	match weapon:
+		1:
+			$Triangle.queue_free()
+			$Polygon.queue_free()
+		2:
+			$Square.queue_free()
+			$Polygon.queue_free()
+		3:
+			$Square.queue_free()
+			$Triangle.queue_free()
 
 func _physics_process(_delta) -> void:
 	if GlobalVariables.paused == true:
@@ -45,16 +58,46 @@ func _physics_process(_delta) -> void:
 			
 		if($onscreen.is_on_screen()):
 			look_at(player.global_position)
-			fire()
+			match weapon:
+				1:
+					square_fire()
+				2:
+					triangle_fire()
+				3:
+					polygon_fire()
 		
 
-func fire():
+var moreshots = 5
+func polygon_fire():
+	if $Polygon/long.is_stopped() and $Polygon/short.is_stopped():
+		$Polygon/short.start()
+		fire()
+		moreshots -= 1
+		if moreshots <= 0:
+			$Polygon/long.start()
+			moreshots = 3
+
+var shots = 3
+func triangle_fire():
+	if $Triangle/long.is_stopped() and $Triangle/short.is_stopped():
+		$Triangle/short.start()
+		fire()
+		shots -= 1
+		if shots <= 0:
+			$Triangle/long.start()
+			shots = 3
+		
+		
+func square_fire():
 	if cooldown.is_stopped():
+		fire()
+		cooldown.start()
+		
+func fire():
 		$Shot.play()
 		var bullet_instance = bullet.instantiate()
 		direction = (end.global_position - global_position).normalized()
 		GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 1)
-		cooldown.start()
 
 func onkill():
 	GlobalSignals.update_coins.emit((10 * GlobalVariables.coin_multi), false)

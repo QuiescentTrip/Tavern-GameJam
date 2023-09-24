@@ -6,8 +6,7 @@ extends CanvasLayer
 var coins_needed
 
 func _ready():
-	print(GlobalVariables.deaths)
-	coins_needed = GlobalVariables.deaths * 100 
+	coins_needed = GlobalVariables.deaths * 100
 	minus_coins.text = "-" + str(coins_needed)
 	if(GlobalVariables.coins < coins_needed):
 		continue_button.disabled = true
@@ -26,7 +25,6 @@ func _on_continue_pressed():
 	if GlobalVariables.coins >= coins_needed:
 		GlobalSignals.update_coins.emit(coins_needed, 1)
 		GlobalSignals.continued.emit()
-		GlobalSignals.resetglobal.emit()
 
 
 func _on_main_menu_pressed():

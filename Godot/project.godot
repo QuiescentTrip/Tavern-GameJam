@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Tavern Game Jam"
+config/name="Mell0"
 run/main_scene="res://Title.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 0)
+boot_splash/image="res://sprites/Health_empty.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://Icon.png"
 
 [autoload]
 
@@ -24,6 +28,7 @@ GlobalVariables="*res://Signal/GlobalVariables.gd"
 
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="res://sprites/corshair.png"
 
 [input]
 

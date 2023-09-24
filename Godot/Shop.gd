@@ -25,6 +25,7 @@ func _on_area_2d_body_entered(body):
 
 func _on_heart_body_entered(body):
 	if GlobalVariables.coins >= heart_price:
+		$Pickup.play()
 		GlobalSignals.update_coins.emit(heart_price, 1)
 		GlobalVariables.max_hearts += 1
 		GlobalVariables.hearts += 1
@@ -33,6 +34,7 @@ func _on_heart_body_entered(body):
 
 func _on_shield_body_entered(body):
 	if GlobalVariables.coins >= shield_price:
+		$Pickup.play()
 		GlobalSignals.update_coins.emit(shield_price, 1)
 		GlobalVariables.shield_regen += 1
 		
@@ -41,6 +43,11 @@ func _on_shield_body_entered(body):
 
 func _on_coin_body_entered(body):
 	if GlobalVariables.coins >= double_price:
+		$Pickup.play()
 		GlobalSignals.update_coins.emit(double_price, 1)
 		GlobalVariables.coin_multi += 1
 		call_deferred("remove_child", $Coin)
+
+
+func _on_audio_stream_player_finished():
+	$AudioStreamPlayer.play() # Replace with function body.

@@ -20,9 +20,14 @@ var paused_screen
 
 var _velocity := Vector2.ZERO
 func _ready():
+	GlobalSignals.continued.connect(_onContinue)
 	$Sprite2D.visible = not $Sprite2D.visible
 	
 
+	
+func _onContinue():
+	invincible = true
+	$invincible2.start()
 	
 func _physics_process(_delta: float) -> void:
 	if GlobalVariables.paused == true:
@@ -45,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 	
-	if invincible_timer.is_stopped():
+	if invincible_timer.is_stopped() or $invincible2.is_stopped():
 		invincible = false
 		
 	if direction.length() > 1.0:
@@ -72,7 +77,7 @@ func _input(event):
 		paused_screen = paused.instantiate()
 		get_parent().add_child(paused_screen)
 		GlobalVariables.paused = true
-	elif event.is_action_pressed("escape") and GlobalVariables.paused:
+	elif event.is_action_pressed("escape") and GlobalVariables.paused  and get_parent().get_node("game_over") == null:
 		get_parent().remove_child(paused_screen)
 		GlobalVariables.paused = false
 	
@@ -88,6 +93,7 @@ func onkill():
 		GlobalSignals.update_heart.emit(1, true)
 		GlobalVariables.hearts -= 1
 		if GlobalVariables.hearts == 0:
+			GlobalVariables.deaths += 1
 			GlobalSignals.died.emit()
 	elif shielded:
 		invincible_timer.start()
@@ -96,7 +102,8 @@ func onkill():
 		if invincible_timer.is_stopped():
 			invincible_timer.start()
 			invincible = true
-		$Pickup.play()
+		if !invincible:
+			$Pickup.play()
 		AnimatedSprite.frame = 1
 		empty = false
 		

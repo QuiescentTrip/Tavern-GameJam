@@ -11,7 +11,7 @@ var ypos = round(865.9188)
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	$Timer.wait_time = GlobalVariables.level
+	$Timer.wait_time = (1/GlobalVariables.level) * 4 + 0.75
 
 func _physics_process(delta):
 	if GlobalVariables.paused:
@@ -26,6 +26,7 @@ func _on_timer_timeout():
 		if pos.distance_to(player.position) > 600:
 			var enemy = Basic_Enemy.instantiate()
 			enemy.position = pos
+			enemy.weapon = randi_range(1,3)
 			add_child(enemy)
 			$Timer.start()
 		else:

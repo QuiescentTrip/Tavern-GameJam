@@ -1,12 +1,12 @@
 extends Node
 
-var hearts = 1
+var hearts = 2
 var level = 1
 var coins = 0
 var paused = false
 var deaths = 0
 
-var max_hearts = 1
+var max_hearts = 2
 var shield_regen = 1
 var coin_multi = 1
 
