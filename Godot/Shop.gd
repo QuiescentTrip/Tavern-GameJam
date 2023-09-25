@@ -20,7 +20,8 @@ func _process(delta):
 
 
 func _on_area_2d_body_entered(body):
-	get_tree().change_scene_to_file("res://World.tscn")
+	if $Timer.is_stopped():
+		get_tree().change_scene_to_file("res://World.tscn")
 
 
 func _on_heart_body_entered(body):

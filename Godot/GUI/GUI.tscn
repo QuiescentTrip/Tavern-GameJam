@@ -41,7 +41,6 @@ layout_mode = 2
 texture = ExtResource("1_swf2a")
 
 [node name="Coins" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-texture_filter = 1
 layout_mode = 2
 text = "Test"
 

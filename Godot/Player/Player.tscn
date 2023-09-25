@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdqg41xlkfgan"]
+[gd_scene load_steps=12 format=3 uid="uid://cdqg41xlkfgan"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lx08a"]
 [ext_resource type="AudioStream" uid="uid://d02q4y7okdr0o" path="res://sfx/sound.wav" id="2_btart"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://q3ift25k5vqh" path="res://sprites/shield.png" id="4_g2tok"]
 [ext_resource type="AudioStream" uid="uid://q5u0m8jee3hw" path="res://sfx/possible_death_sound.wav" id="5_ngywk"]
 [ext_resource type="AudioStream" uid="uid://d0e2dxvphfewh" path="res://sfx/possible_pickup_sound.wav" id="6_dsfy5"]
+[ext_resource type="AudioStream" uid="uid://det6jqmye0ad6" path="res://sfx/hit.wav" id="7_cmqig"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pd7fc"]
 
@@ -67,3 +68,7 @@ wait_time = 0.05
 one_shot = true
 
 [node name="invincible2" type="Timer" parent="."]
+autostart = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_cmqig")

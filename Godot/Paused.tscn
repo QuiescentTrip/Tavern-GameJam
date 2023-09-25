@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbcseiv0kv7h5"]
+[gd_scene load_steps=7 format=3 uid="uid://cbcseiv0kv7h5"]
 
 [ext_resource type="Script" path="res://Paused.gd" id="1_qem4v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hl6mk"]
-bg_color = Color(0.239216, 0.239216, 0.239216, 0.741176)
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.870588)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_si08m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5q133"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gt7wr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgc04"]
 
 [node name="Paused" type="Node2D"]
 script = ExtResource("1_qem4v")
@@ -53,17 +61,35 @@ horizontal_alignment = 1
 
 [node name="Resume" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.984314, 0.72549, 0.329412, 1)
 theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_si08m")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5q133")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_si08m")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_si08m")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_si08m")
 text = "Resume"
 
 [node name="Restart" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.984314, 0.72549, 0.329412, 1)
 theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gt7wr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gt7wr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gt7wr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gt7wr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gt7wr")
 text = "Restart"
 
 [node name="Main Menu" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.984314, 0.72549, 0.329412, 1)
 theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xgc04")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xgc04")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xgc04")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xgc04")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xgc04")
 text = "Main Menu"
 
 [connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]

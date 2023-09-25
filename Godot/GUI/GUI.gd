@@ -28,7 +28,7 @@ func _change_level_label(level):
 func _ready():
 	level = GlobalVariables.level
 	if get_parent().name == "World":
-		var current_song = GlobalVariables.level % 2
+		var current_song = GlobalVariables.level % 3
 		song = get_parent().get_node("Music" + str(current_song))
 		_change_level_label(level)
 		level_time = int(song.stream.get_length())

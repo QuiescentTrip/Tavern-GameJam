@@ -32,6 +32,7 @@ texture = ExtResource("10_nkol4")
 sources/0 = SubResource("TileSetAtlasSource_udct5")
 
 [node name="Shop" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_0jact")
 
 [node name="GUI" parent="." instance=ExtResource("1_rxxf3")]
@@ -53,6 +54,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_bsek3")
 
 [node name="Label" type="Label" parent="Heart"]
+texture_filter = 1
 offset_left = -38.0
 offset_top = -33.0
 offset_right = 569.0
@@ -96,6 +98,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_srdkn")
 
 [node name="Label" type="Label" parent="Shield"]
+texture_filter = 1
 offset_left = -35.0
 offset_top = -33.5
 offset_right = 572.0
@@ -139,6 +142,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("7_8xakc")
 
 [node name="Label2" type="Label" parent="Coin"]
+texture_filter = 1
 offset_left = -35.0
 offset_top = -33.5
 offset_right = 572.0
@@ -208,6 +212,9 @@ layer_0/tile_data = PackedInt32Array(1310721, 0, 0, 1310720, 0, 0, 1376255, 0, 0
 [node name="Pickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_bdbd2")
 volume_db = -7.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
 [connection signal="body_entered" from="Heart/Heart" to="." method="_on_heart_body_entered"]

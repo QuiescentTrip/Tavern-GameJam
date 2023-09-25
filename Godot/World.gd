@@ -13,7 +13,7 @@ var count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	song_select = GlobalVariables.level % 2
+	song_select = GlobalVariables.level % 3
 	song = get_node("Music" + str(song_select))
 	song.play()
 	GlobalSignals.died.connect(_ondeath)

@@ -32,14 +32,13 @@ func _onContinue():
 func _physics_process(_delta: float) -> void:
 	if GlobalVariables.paused == true:
 		return
-		
 	
 	
 	if shielded:
 		shield = max(shield - shield_degen, 0)
 	elif shield < 100 and !shielded :
-		var regen = (shield + 0.25) * GlobalVariables.shield_regen
-		shield = min(regen, 100)
+		var regen = shield + (GlobalVariables.shield_regen-0.5)/2
+		shield = minf(regen, 100)
 	
 	if shield <= 0:
 		$Sprite2D.visible = false
@@ -77,7 +76,7 @@ func _input(event):
 		paused_screen = paused.instantiate()
 		get_parent().add_child(paused_screen)
 		GlobalVariables.paused = true
-	elif event.is_action_pressed("escape") and GlobalVariables.paused  and get_parent().get_node("game_over") == null:
+	elif event.is_action_pressed("escape") and GlobalVariables.paused and get_parent().get_node("game_over") == null:
 		get_parent().remove_child(paused_screen)
 		GlobalVariables.paused = false
 	
@@ -95,15 +94,16 @@ func onkill():
 		if GlobalVariables.hearts == 0:
 			GlobalVariables.deaths += 1
 			GlobalSignals.died.emit()
+		$Hit.play()
 	elif shielded:
 		invincible_timer.start()
 		pass
 	else:
+		if !invincible:
+			$Pickup.play()
 		if invincible_timer.is_stopped():
 			invincible_timer.start()
 			invincible = true
-		if !invincible:
-			$Pickup.play()
 		AnimatedSprite.frame = 1
 		empty = false
 		

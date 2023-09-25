@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cffpfvkkashyb"]
+[gd_scene load_steps=6 format=3 uid="uid://cffpfvkkashyb"]
 
 [ext_resource type="Script" path="res://Title.gd" id="1_dyac6"]
+[ext_resource type="FontFile" uid="uid://dm0l2gd04edal" path="res://cuppa-joe/CuppaJoe.ttf" id="2_7n0i1"]
 [ext_resource type="AudioStream" uid="uid://bplub02mokaet" path="res://music/Main menu.wav" id="2_8lrbj"]
+[ext_resource type="FontFile" uid="uid://btqmmp4otmrw" path="res://crystal-deco/Crystal Deco.ttf" id="3_70j4j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wnlge"]
 
 [node name="Title" type="Node2D"]
+script = ExtResource("1_dyac6")
 
 [node name="Title_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_8lrbj")
@@ -13,6 +18,15 @@ autoplay = true
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+modulate = Color(0.941176, 0.309804, 0.470588, 1)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,28 +46,32 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 35
+theme_override_constants/separation = 50
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("2_7n0i1")
+theme_override_font_sizes/font_size = 95
 text = "        Mell0        "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Play" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_colors/font_hover_color = Color(0.984314, 0.72549, 0.329412, 1)
+theme_override_fonts/font = ExtResource("3_70j4j")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wnlge")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wnlge")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wnlge")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wnlge")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wnlge")
 text = "Begin"
-
-[node name="Quit" type="Button" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Exit"
-script = ExtResource("1_dyac6")
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Play" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" to="CanvasLayer/Control/MarginContainer/VBoxContainer/Quit" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]

@@ -75,7 +75,7 @@ func polygon_fire():
 		moreshots -= 1
 		if moreshots <= 0:
 			$Polygon/long.start()
-			moreshots = 3
+			moreshots = 5
 
 var shots = 3
 func triangle_fire():
@@ -100,5 +100,6 @@ func fire():
 		GlobalSignals.bullet_fired.emit(bullet_instance, end.global_position, direction, 1)
 
 func onkill():
+	GlobalVariables.score += 10
 	GlobalSignals.update_coins.emit((10 * GlobalVariables.coin_multi), false)
 	queue_free()
